@@ -31,6 +31,7 @@ def add(desc):
     }
     database.append(task)
     save_file(database)
+    print(f"Task added successfully! (ID: {next_id})")
 
 def main():
     command = sys.argv[1].lower()
