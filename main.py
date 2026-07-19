@@ -5,16 +5,18 @@ from datetime import datetime
 
 file_name = "tasks.json"
 
+
 def load_file():
     if os.path.exists(file_name):
-        with open(file_name,'r') as file:
+        with open(file_name, "r") as file:
             return json.load(file)
     else:
         return []
 
+
 def save_file(database):
-    with open(file_name,'w') as file:
-        json.dump(database,file,indent=4)
+    with open(file_name, "w") as file:
+        json.dump(database, file, indent=4)
 
 
 def add(desc):
@@ -27,15 +29,36 @@ def add(desc):
         "description": desc,
         "status": "todo",
         "createdAt": formatted_time,
-        "updatedAt": formatted_time
+        "updatedAt": formatted_time,
     }
     database.append(task)
     save_file(database)
     print(f"Task added successfully! (ID: {next_id})")
 
+
+def update(id, desc):
+    database = load_file()
+    id = int(id)
+    date = datetime.now()
+    formatted_time = date.strftime("%Y-%m-%d %H:%M:%S")
+
+    for data in database:
+        if data["id"] == id:
+            data["description"] = desc
+            data["updatedAt"] = formatted_time
+            save_file(database)
+            break
+    else:
+        print("Invalid ID")
+        return
+
+
 def main():
     command = sys.argv[1].lower()
-    if command == 'add':
+    if command == "add":
         add(sys.argv[2])
+    elif command == "update":
+        update(sys.argv[2], sys.argv[3])
+
 
 main()
