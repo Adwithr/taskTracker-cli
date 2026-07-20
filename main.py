@@ -53,12 +53,31 @@ def update(id, desc):
         return
 
 
+def delete(id):
+    database = load_file()
+    id = int(id)
+
+    for data in database:
+        if data["id"] == id:
+            task = data
+            break
+    else:
+        print("Invalid ID")
+        return
+
+    database.remove(task)
+    save_file(database)
+    print("Task deleted succesfully!")
+
+
 def main():
     command = sys.argv[1].lower()
     if command == "add":
         add(sys.argv[2])
     elif command == "update":
         update(sys.argv[2], sys.argv[3])
+    elif command == "delete":
+        delete(sys.argv[2])
 
 
 main()
