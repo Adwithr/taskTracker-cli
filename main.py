@@ -70,6 +70,20 @@ def delete(id):
     print("Task deleted succesfully!")
 
 
+def markInProgress(id):
+    database = load_file()
+    id = int(id)
+
+    for data in database:
+        if data["id"] == id:
+            data["status"] = "in-progress"
+            break
+    else:
+        print("Invalid ID")
+        return
+    save_file(data)
+
+
 def main():
     command = sys.argv[1].lower()
     if command == "add":
@@ -78,6 +92,8 @@ def main():
         update(sys.argv[2], sys.argv[3])
     elif command == "delete":
         delete(sys.argv[2])
+    elif command == "mark-in-progress":
+        markInProgress(sys.argv[2])
 
 
 main()
