@@ -81,7 +81,21 @@ def markInProgress(id):
     else:
         print("Invalid ID")
         return
-    save_file(data)
+    save_file(database)
+
+
+def markDone(id):
+    database = load_file()
+    id = int(id)
+
+    for data in database:
+        if data["id"] == id:
+            data["status"] = "done"
+            break
+    else:
+        print("Invalid ID")
+        return
+    save_file(database)
 
 
 def main():
@@ -94,6 +108,8 @@ def main():
         delete(sys.argv[2])
     elif command == "mark-in-progress":
         markInProgress(sys.argv[2])
+    elif command == "mark-done":
+        markDone(sys.argv[2])
 
 
 main()
