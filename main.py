@@ -98,6 +98,18 @@ def markDone(id):
     save_file(database)
 
 
+def list():
+    database = load_file()
+    if not database:
+        print("There are no tasks.")
+        return
+    for data in database:
+        print(
+            f"ID: {data["id"]}\nDescription: {data["description"]}\nStatus: {data["status"]}\nCreated at: {data["createdAt"]}\nUpdated at: {data["updatedAt"]}"
+        )
+        print("---------------------------------")
+
+
 def main():
     command = sys.argv[1].lower()
     if command == "add":
@@ -110,6 +122,8 @@ def main():
         markInProgress(sys.argv[2])
     elif command == "mark-done":
         markDone(sys.argv[2])
+    elif command == "list":
+        list()
 
 
 main()
