@@ -80,6 +80,7 @@ def markInProgress(id):
     for data in database:
         if data["id"] == id:
             data["status"] = "in-progress"
+            data["updatedAt"] = curTime()
             break
     else:
         print("Invalid ID")
@@ -94,6 +95,7 @@ def markDone(id):
     for data in database:
         if data["id"] == id:
             data["status"] = "done"
+            data["updatedAt"] = curTime()
             break
     else:
         print("Invalid ID")
