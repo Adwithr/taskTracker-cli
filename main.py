@@ -106,16 +106,29 @@ def markDone(id):
     save_file(database)
 
 
-def list():
+def list(status):
     database = load_file()
     if not database:
         print("There are no tasks.")
         return
-    for data in database:
-        print(
-            f"ID: {data["id"]}\nDescription: {data["description"]}\nStatus: {data["status"]}\nCreated at: {data["createdAt"]}\nUpdated at: {data["updatedAt"]}"
-        )
-        print("---------------------------------")
+    elif status:
+        for data in database:
+            if data["status"] == status:
+                print(
+                    f"ID: {data["id"]}\nDescription: {data["description"]}\nStatus: {data["status"]}\nCreated at: {data["createdAt"]}\nUpdated at: {data["updatedAt"]}"
+                )
+                print("---------------------------------")
+        else:
+            print("There are no tasks.")
+
+    else:
+        for data in database:
+            print(
+                f"ID: {data["id"]}\nDescription: {data["description"]}\nStatus: {data["status"]}\nCreated at: {data["createdAt"]}\nUpdated at: {data["updatedAt"]}"
+            )
+            print("---------------------------------")
+        else:
+            print("There are no tasks.")
 
 
 def main():
@@ -131,7 +144,10 @@ def main():
     elif command == "mark-done":
         markDone(sys.argv[2])
     elif command == "list":
-        list()
+        if len(sys.argv) > 2:
+            list(sys.argv[2])
+        else:
+            list(None)
 
 
 main()
