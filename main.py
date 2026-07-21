@@ -19,10 +19,15 @@ def save_file(database):
         json.dump(database, file, indent=4)
 
 
-def add(desc):
-    database = load_file()
+def curTime():
     date = datetime.now()
     formatted_time = date.strftime("%Y-%m-%d %H:%M:%S")
+    return formatted_time
+
+
+def add(desc):
+    database = load_file()
+    formatted_time = curTime()
     next_id = max([task["id"] for task in database], default=0) + 1
     task = {
         "id": next_id,
@@ -39,9 +44,7 @@ def add(desc):
 def update(id, desc):
     database = load_file()
     id = int(id)
-    date = datetime.now()
-    formatted_time = date.strftime("%Y-%m-%d %H:%M:%S")
-
+    formatted_time = curTime()
     for data in database:
         if data["id"] == id:
             data["description"] = desc
