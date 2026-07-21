@@ -50,6 +50,7 @@ def update(id, desc):
             data["description"] = desc
             data["updatedAt"] = formatted_time
             save_file(database)
+            print("Task updated successfully!")
             break
     else:
         print("Invalid ID")
@@ -81,6 +82,7 @@ def markInProgress(id):
         if data["id"] == id:
             data["status"] = "in-progress"
             data["updatedAt"] = curTime()
+            print(f"Task {id} is marked as in-progress.")
             break
     else:
         print("Invalid ID")
@@ -96,6 +98,7 @@ def markDone(id):
         if data["id"] == id:
             data["status"] = "done"
             data["updatedAt"] = curTime()
+            print(f"Task {id} is marked as done.")
             break
     else:
         print("Invalid ID")
