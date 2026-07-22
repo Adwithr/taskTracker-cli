@@ -71,7 +71,7 @@ def delete(id):
 
     database.remove(task)
     save_file(database)
-    print("Task deleted succesfully!")
+    print("Task deleted successfully!")
 
 
 def markInProgress(id):
@@ -118,8 +118,6 @@ def list(status):
                     f"ID: {data["id"]}\nDescription: {data["description"]}\nStatus: {data["status"]}\nCreated at: {data["createdAt"]}\nUpdated at: {data["updatedAt"]}"
                 )
                 print("---------------------------------")
-        else:
-            print("There are no tasks.")
 
     else:
         for data in database:
@@ -127,8 +125,6 @@ def list(status):
                 f"ID: {data["id"]}\nDescription: {data["description"]}\nStatus: {data["status"]}\nCreated at: {data["createdAt"]}\nUpdated at: {data["updatedAt"]}"
             )
             print("---------------------------------")
-        else:
-            print("There are no tasks.")
 
 
 def main():
