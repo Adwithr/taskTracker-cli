@@ -146,4 +146,5 @@ def main():
             list(None)
 
 
-main()
+if __name__ == "__main__":
+    main()
